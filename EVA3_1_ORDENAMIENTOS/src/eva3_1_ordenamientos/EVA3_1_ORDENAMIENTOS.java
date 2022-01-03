@@ -17,12 +17,17 @@ public class EVA3_1_ORDENAMIENTOS {
     public static void main(String[] args) {
         // TODO code application logic here
         //Se ordenará un arreglo de enteros
-        int [] datos = new int[10];
+        int [] datos = new int[100000];
+        long iniT, finT;
         llenar(datos);//Se llena el arreglo con valores aleatorios
-        imprimir(datos);//Se imprime el arreglo
+        
+        System.out.println("Prueba con Selection Sort: ");
+        //imprimir(datos);//Se imprime el arreglo
+        iniT=System.nanoTime();
         selectionSort(datos);
-        System.out.println("");
-        imprimir(datos);
+        finT=System.nanoTime();
+        //imprimir(datos);
+        System.out.println("Tiempo en ordenar: " + (finT-iniT));
         
         
     }
@@ -38,6 +43,7 @@ public class EVA3_1_ORDENAMIENTOS {
             for(int i=0; i<datos.length;i++){
                 System.out.print("["+datos[i]+"]");
             }
+            System.out.println("");
         }
         
         //Eficiencia O(n^2)
