@@ -21,6 +21,7 @@ public class EVA3_1_ORDENAMIENTOS {
         long iniT, finT;
         llenar(datos);//Se llena el arreglo con valores aleatorios
         
+        /*
         System.out.println("Prueba con Selection Sort: ");
         //imprimir(datos);//Se imprime el arreglo
         iniT=System.nanoTime();
@@ -28,7 +29,14 @@ public class EVA3_1_ORDENAMIENTOS {
         finT=System.nanoTime();
         //imprimir(datos);
         System.out.println("Tiempo en ordenar: " + (finT-iniT));
-        
+        */
+        System.out.println("Prueba con Insertion Sort: ");
+        //imprimir(datos);//Se imprime el arreglo
+        iniT=System.nanoTime();
+        insertionSort(datos);
+        finT=System.nanoTime();
+        //imprimir(datos);
+        System.out.println("Tiempo en ordenar: " + (finT-iniT));        
         
     }
         //LLENADO del arreglo con valores aleatorios desde 0 a 99
@@ -68,4 +76,23 @@ public class EVA3_1_ORDENAMIENTOS {
                 }
             }
         }
+        
+        public static void insertionSort(int[] datos){
+            for(int i=0;i<datos.length;i++){
+                int temp = datos[i]; //Valor a insertar
+                int insP = i; //Posicion donde vamos a insertar
+                for(int prev = i - 1;prev>=0;prev--){//Busca donde insertar
+                    if(datos[prev]>temp){
+                        datos[insP] = datos[prev];//movemos valor de prev a la posición insP
+                        insP--;//retrocede una posicion
+                        
+                    }else{
+                        break;
+                    }
+                }
+                datos[insP]=temp; //Insertamos
+            }
+        }
 }
+
+        
