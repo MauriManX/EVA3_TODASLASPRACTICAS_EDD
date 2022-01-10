@@ -127,6 +127,45 @@ public class EVA3_1_ORDENAMIENTOS {
                 }
             }
         }
+        
+        //QuickSort de arranque
+        public static void quickSort(int[] datos){
+            recuQuickSort(datos,0,datos.length-1); //QuickSort a todo el arreglo
+        }
+        
+        public static void recuQuickSort(int[] datos, int ini, int fin){
+            int iPivote; //inicio
+            int too_big; //Buscar a los más grandes que el pivote
+            int too_small; //Buscar a los más pequeños que el pivote
+            boolean stopBig = false, stopSmall = false;
+            //Controlar la recursividad
+            int tama = fin -ini + 1;
+            if(tama > 1){//¿Cuando SÍ puedo realizar QuickSort?
+                iPivote = ini;
+                too_big = ini + 1;
+                too_small = fin;
+                for(int i = ini+1 ;i<=fin; i++){//Numero de veces a recorrer
+                    if(datos[too_big] <= datos[iPivote] && (!stopBig)){//Se avanza
+                        too_big++;
+                    }else{
+                        stopBig = true;// Se detiene cuando encuentra uno más grande
+                        
+                    }
+                    if(datos[too_small] >= datos[iPivote] && (!stopSmall)){//Se retrocede
+                        too_small--;
+                    }else{
+                        stopSmall = true;// Se detiene cuando encuentra uno más pequeño
+                        
+                    }
+                    //Ambos se detienen (swap)
+                    if(stopBig && stopSmall){
+                        
+                    }
+                    
+                }
+                
+            }
+        }
 }
 
         
