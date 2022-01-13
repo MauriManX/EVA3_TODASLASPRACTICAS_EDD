@@ -17,10 +17,11 @@ public class EVA3_1_ORDENAMIENTOS {
     public static void main(String[] args) {
         // TODO code application logic here
         //Se ordenará un arreglo de enteros
-        int [] datos = new int[1000];
+        int [] datos = new int[10];
         int [] datos1 = new int[datos.length];
         int [] datos2 = new int[datos.length];
         int [] datos3 = new int[datos.length];
+        int [] datos4 = new int[datos.length];
         long iniT, finT;
         llenar(datos);//Se llena el arreglo con valores aleatorios
         
@@ -28,6 +29,7 @@ public class EVA3_1_ORDENAMIENTOS {
         copiar(datos,datos1);
         copiar(datos,datos2);
         copiar(datos,datos3);
+        copiar(datos,datos4);
         
         //Pruebas
         //1
@@ -53,6 +55,14 @@ public class EVA3_1_ORDENAMIENTOS {
         bubbleSort(datos3);
         finT=System.nanoTime();
         imprimir(datos3);
+        System.out.println("Tiempo en ordenar: " + (finT-iniT));
+        //4
+        System.out.println("4. Prueba con Quick Sort: ");
+        imprimir(datos4);//Se imprime el arreglo
+        iniT=System.nanoTime();
+        quickSort(datos4);
+        finT=System.nanoTime();
+        imprimir(datos4);
         System.out.println("Tiempo en ordenar: " + (finT-iniT));
     }
         //LLENADO del arreglo con valores aleatorios desde 0 a 99
@@ -129,6 +139,7 @@ public class EVA3_1_ORDENAMIENTOS {
         }
         
         //QuickSort de arranque
+        //
         public static void quickSort(int[] datos){
             recuQuickSort(datos,0,datos.length-1); //QuickSort a todo el arreglo
         }
@@ -145,24 +156,42 @@ public class EVA3_1_ORDENAMIENTOS {
                 too_big = ini + 1;
                 too_small = fin;
                 for(int i = ini+1 ;i<=fin; i++){//Numero de veces a recorrer
-                    if(datos[too_big] <= datos[iPivote] && (!stopBig)){//Se avanza
+                    if(datos[too_big] < datos[iPivote] && (!stopBig)){//Se avanza
                         too_big++;
                     }else{
                         stopBig = true;// Se detiene cuando encuentra uno más grande
                         
                     }
                     if(datos[too_small] >= datos[iPivote] && (!stopSmall)){//Se retrocede
-                        too_small--;
+                        too_small--;//Retrocede
                     }else{
                         stopSmall = true;// Se detiene cuando encuentra uno más pequeño
                         
                     }
                     //Ambos se detienen (swap)
                     if(stopBig && stopSmall){
-                        
+                        if (too_big<too_small){
+                            int temp = datos[too_big];
+                            datos[too_big] = datos[too_small];
+                            datos[too_small] = temp;
+                            //Sigue avanzando
+                            stopBig=false;
+                            stopSmall=false;
+                        }else
+                            break;//Termina el ciclo
                     }
                     
                 }
+                //intercabio el pivote
+                int temp = datos[iPivote];
+                datos[iPivote] = datos[too_small];
+                datos[too_small] = temp;
+                iPivote = too_small; //Ta,bién cambia la posición del pivote
+                //quicksort (izq)
+                recuQuickSort(datos,ini, iPivote-1);
+                //quicksort (der)
+                recuQuickSort(datos, iPivote+1,fin);
+                
                 
             }
         }
